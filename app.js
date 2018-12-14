@@ -1,49 +1,59 @@
-const APIKey = "50349a9df4c9478e9df1bc1bc5277f63";
-//NOTE API Key for nytimes article search
+const getInput = function(event) {
 
-const buildURL = function() {
-  const userInputSearch = $("#input").val();
-  const userInputBYear = $("#begin_date").val();
-  const userInputEYear = $("#end_date").val();
-  console.log(userInputSearch, userInputBYear, userInputEYear);
-  $("#input, #begin_date, #end_date").val("");
+  event.preventDefault();
 
-  const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=${APIKey}&q=${userInputSearch}&begin_date=${userInputBYear}0101&end_date=${userInputEYear}0101`;
+  //Gras API  data, determined by user input
+  console.log("search clicked");
+  const keywordInput = $('#keyword').val();
+  console.log(keywordInput);
+  const numRecordInput = $('#numRecord').val();
+  console.log(numRecordInput);
+  const startYearInput = $('#startYear').val();
+  console.log(startYearInput);
+  const endYearInput = $('#endYear').val();
+  console.log(endYearInput);
 
-  return queryURL;
-};
+  //Display Articles on index.html
+  displayResults(keywordInput, numRecordInput, startYearInput, endYearInput);
+}
 
-const getArticles = function(e) {
-  e.preventDefault();
+const displayResults = function(keywordInput, numRecordInput, startYearInput, endYearInput) {
+  console.log ("displayResults keywordInput", keywordInput);
 
-  console.log(buildURL());
+  const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=50349a9df4c9478e9df1bc1bc5277f63&q=${keywordInput}&beg_date${startYearInput}&end_date${endYearInput}`;
+ 
+// AJAX request to retireve search results
+$.ajax({
+  url: queryURL,
+  method: 'GET'
 
-  // $.ajax({
-  //     url: buildURL(),
-  //     method: "GET"
-  //   }).then(function(response) {
-  //     console.log(response);
+}).then(function(response) {
+  console.log(response);
 
-  //     //Creates div for articles
-  // 		const articleDiv = $('<div>').addClass('articles');
+  for (let i=0; i<numRecordInput; i++) {
+  const article = response.response.docs[i].headline.main;
+  const articleUrl = response.response.docs[i].web_url;
 
-  //     const headline = response.docs[0].headline.main;
+  console.log("article", article);
 
-  //     const headlineHolder = $(`<p>${headline}</p>`);
+  const artElement = $('<p>').text(`${article}`);
+  const artUrlElement = $('<p>').text(`${articleUrl}`);
 
-  //     articleDiv.append(headlineHolder);
 
-  //     const pubDate = response.docs[0].pub_date;
+  $('#results').prepend(artUrlElement);
+  $('#results').prepend(artElement);
+  $('#results').prepend(`<hr>`);
+ 
+  }
+});
 
-  //     const webURL = response.docs[0].web_url;
+}
 
-  //     $(col-12).append(articleDiv)
+const clearResults = function() {
 
-  //   })
-};
+  $('#results').empty();
+}
 
-$("#searchbtn").on("click", getArticles);
 
-// $('SECTION INPUT').on('click');
-
-// render();
+$('#search').on('click', getInput);
+$('#clear').on('click', clearResults);

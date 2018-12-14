@@ -1,79 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 
-    <title>New York Times Search</title>
+    <title>New York Times API Articles Search</title>
 </head>
 
+
 <body>
-    <h1>New York Times Search</h1>
 
     <form>
-        <div class="form-group row">
-            <label for="input" class="col-sm-2 col-form-label">Search for:</label>
-            <div class="col-sm-10">
-                <input type="input" class="form-control" id="input" placeholder="Input">
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                # of Records to Retrieve
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">1</a>
-                <a class="dropdown-item" href="#">5</a>
-                <a class="dropdown-item" href="#">10</a>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="begin_year" class="col-sm-2 col-form-label">Begin Year (Optional)</label>
-            <div class="col-sm-10">
-                <input type="begin_date" class="form-control" id="begin_date" placeholder="Begin Year">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="end_year" class="col-sm-2 col-form-label">End Year (Optional)</label>
-            <div class="col-sm-10">
-                <input type="end_date" class="form-control" id="end_date" placeholder="End Year">
-            </div>
-        </div>
-        </div>
-        </div>
-        </fieldset>
+        <p>Search Term:</p>
+        <input type="text" id="keyword">
+        <br>
+        <p>Number of Record to Retrieve:</p>
+        <input type="number" id="numRecord">
+        <br>
+        <p>Start Year (optional):</p>
+        <input type="date" id="startYear">
+        <br>
+        <p>End Year (optional):</p>
+        <input type="date" id="endYear">
+        <br>
+        <br>
+        <button id="search" type="submit">Search</button>
+        <button id="clear">Clear Results</button>
 
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary" id="searchbtn">Search</button>
-                <input class="btn btn-primary" type="reset" value="Reset">
-            </div>
-        </div>
     </form>
 
+    <main>
+        <p>Top Articles</p>
+        <br>
+        <div id=results></div>
 
+    </main>
 
-    <div class="col-12"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
 
-
-
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                crossorigin="anonymous"></script>
-
-            <script src="app.js"></script>
 </body>
 
 </html>
